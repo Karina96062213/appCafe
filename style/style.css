@@ -53,7 +53,7 @@ footer {
 .botonInit {
     border-radius: 5px;
     border: 2px solid transparent;
-    background: #5e2129;
+    background: #ccb08a;
     color: white;
     width: 128px;
     height: 32px;
@@ -212,8 +212,8 @@ footer {
 .botonRegistro {
     width: 190px;
     height: 60px;
-    background-color: #5e2129;
-    border-color: #5e2129;
+    background-color: #ccb08a;
+    border-color: #ccb08a;
     text-align: center;
     font-size: 1.4rem;
     color: white;
