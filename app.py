@@ -10,16 +10,6 @@ from flask import g
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-def get_db():
-    try:
-        if "db" not in g:
-            g.db=sqlite3.connect("myCafeteria.db")
-            return g.db  
-    except Error:
-        print("Error en conexión con la Base de Datos")
-
-
-
 def sql_connection():
     try:
         con = sqlite3.connect("myCafeteria.db")
