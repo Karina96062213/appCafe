@@ -1,0 +1,284 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+    color: #ccb08a;
+    font-size: 22px;
+    text-align: left;
+}
+
+input {
+    text-align: center;
+    background-color: #fdfdfd;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 100;
+    width: 450px;
+    line-height: 25px;
+    padding: 5px 0;
+    color: white;
+}
+input:focus {
+    border: 2px solid #ccb08a;
+    box-shadow: none;
+}
+select {
+    background-color: #fdfdfd;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+button {
+    border: 2px solid transparent;
+    background: #ccb08a;
+    font-weight: bold;
+    color: #000000;
+    font-size: 18px;
+    line-height: 25px;
+    padding: 5px 0;
+    text-align: center;
+    border-radius: 5px;
+    width: 150px;
+    align-self: center;
+    margin: 20px 0px 0px 0px;
+}
+button:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+
+.btn {
+    border: 2px solid transparent;
+    background: #ccb08a;
+    
+    color: #000000;
+    font-size: 18px;
+    line-height: 25px;
+    padding: 5px 0;
+    text-decoration: none;
+    text-shadow: none;
+    text-align: center;
+    border-radius: 5px;
+    display: block;
+    align-self: center;
+    width: 150px;
+    margin: 30px 0px 0px 0px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-image: linear-gradient( rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('cafeteria.jpg');
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: auto;
+    padding: 0px;
+    height: 850px;
+}
+
+
+.login {
+    /* position: absolute;
+    top: 100px;
+    left: 450px; 
+    right: 600px;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.login-screen {
+    background-color: rgba(0, 0, 0, .5);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 40%;
+    height: 800px;
+    padding: 30px;
+    /*padding: 30px;
+    justify-content: center;
+    border-radius: 5px*/
+}
+
+p {
+    color: #8c8c8c;
+    font-size: 12px;
+    text-align: left;
+    padding: 30px 0px 0px 62px;
+}
+
+.app-title {
+    color: #fff;
+    font-size: 21px;
+    font-weight: 700;
+    align-self: flex-start;
+    margin: 50px 60px 60px 0px;
+}
+
+header {
+    padding: 40px, 0;
+}
+
+header.container {
+    padding: 30px;
+    display: flex;
+    
+}
+
+footer {
+    background-color: rgba(0, 0, 0, .5);
+    padding: 40px, 0;
+}
+
+.footer-container {
+    padding: 35px 172px 70px 172px;
+    color: rgba(117, 117, 117, 1);
+    background-color: rgba(0, 0, 0, .5);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    font-family: 'Open Sans', sans-serif;
+    display: grid;
+    grid-row-gap: 20px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 850px;
+}
+
+.footer-main {
+    font-size: 20px;
+    grid-row: 1;
+    grid-column: 1/4;
+}
+
+
+
+
+/* ---- ----- ----- contenedor ----- ----- ----- */
+.contenedor-titulo-controles {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.contenedor-titulo-controles h3 {
+	color: #fff;
+	font-size: 25px;
+}
+
+.contenedor-titulo-controles {
+	background: #fff;
+	height: 3px;
+	width: 10px;
+	cursor: pointer;
+	border: none;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+/* ---- ----- ----- Carousel ----- ----- ----- */
+.peliculas-recomendadas .contenedor-carousel {
+	width: 100%;
+	padding: 30px, 0;
+	overflow: hidden;
+	
+}
+
+.peliculas-recomendadas .contenedor-carousel .carousel {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.peliculas-recomendadas .contenedor-carousel .carousel .pelicula img {
+	width: 100%;
+	vertical-align: top;
+}
+
+/* ---- ----- ----- Contenedor Principal y Flechas ----- ----- ----- */
+.peliculas-recomendadas {
+	margin-bottom: 70px;
+}
+
+.peliculas-recomendadas .contenedor-principal {
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.peliculas-recomendadas .contenedor-principal .flecha-izquierda,
+.peliculas-recomendadas .contenedor-principal .flecha-derecha {
+	position: absolute;
+	border: none;
+	background: rgba(0,0,0,0.3);
+	font-size: 40px;
+	height: 50%;
+	top: calc(50% - 25%);
+	line-height: 40px;
+	width: 50px;
+	color: #fff;
+	cursor: pointer;
+	z-index: 500;
+	transition: .2s ease all;
+}
+.peliculas-recomendadas .contenedor-principal .flecha-izquierda {
+	left: 0;
+}
+
+.peliculas-recomendadas .contenedor-principal .flecha-derecha {
+	right: 0;
+}
+
+
+/* ---- ----- ----- Media Queries ----- ----- ----- */
+@media screen and (max-width: 800px) {
+	header .logotipo {
+		margin-bottom: 10px;
+	}
+
+	header .contenedor {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.pelicula-principal {
+		font-size: 14px;
+	}
+
+	.pelicula-principal .descripcion {
+		max-width: 100%;
+	}
+
+	.peliculas-recomendadas .contenedor-carousel {
+		overflow: visible;
+	}
+
+	.peliculas-recomendadas .contenedor-carousel .carousel {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+	}
+
+	.peliculas-recomendadas .indicadores,
+	.peliculas-recomendadas .flecha-izquierda,
+	.peliculas-recomendadas .flecha-derecha {
+		display: none;
+    }
+}

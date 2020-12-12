@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="\static\css\index.css">
+    <link rel="shortcut icon" href="\static\images\faviconca.png" type="image/ico" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
+    <title>Actulizar Stock</title>
+</head>
+<body>
+    <div>
+        <header class="logo">
+            <img src="\static\images\logocafe.png" alt="">
+        </header>
+
+    </div>
+
+    <section align="center" class="form">
+
+    <div class="contenedorPrincipal">
+        <div class="nombreProducto">
+            <h1 class="tituloGeneral">Empanada de Pollo 
+            <h2 class="Descripción">(Unidad por 50 gr)</h2>
+        </div>
+
+         </h1>
+         <img src="\static\images\Empanada de pollo.gif" alt="Empanada de Pollo" width="300" height="200" />
+        <div class="contenedor">
+            <div class="actualizaStock">
+                <div class="stockPrevio">
+                    <h2>Inventario Actual</h2>
+                    <h1 class="numeroStock">12345</h1>
+                    <p>Unidades</p>
+                    <br>
+                </div>
+                <div class="stockFinal">
+                    <h2>Nuevo Stock</h2>
+                    <br>
+                    <input class="label" type="text" name="nuevoStock" id="nstock" placeholder="Nuevo Stock">
+                    <input type="submit" value="Actualizar Stock" id="bt">
+                    <br>
+                </div>
+                <p>Tenga en cuenta que la disponibilidad presentada muestra la cantidad actual del producto en el sistema</p>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
