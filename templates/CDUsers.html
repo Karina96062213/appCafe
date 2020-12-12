@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="..\static\images\faviconca.png" type="image/ico" />
+    <link rel="stylesheet" type="text/css" href="..\static\css\index.css">
+    <title>Gestionar Usuarios</title>
+</head>
+<body>
+    <a href="Bienvenida.html"><img src="..\static\images\logocafe.png" alt=""></a>
+    <section align = "center" class="form" >
+        <table id="tb">
+            <thead>
+                <h1>Gestión de Usuarios</h1>
+
+                <td>ID</td>
+                <td>Nombre</td>
+                <td>Correo</td>
+                <td>Delete</td>
+
+            </thead>
+
+            <tbody >
+                {% for user in usuarios %}
+                    <tr id="trreg">
+                        <td class="reg"> {% print(user[0]) %} </td>
+                        <td class="reg"> {% print(user[1]) %} </td>
+                        <td class="reg"> {% print(user[2]) %} </td>
+                        <td class="reg"><a href="/delete/{{user.0}}">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            
+
+        </table>
+        <br>
+        <input type="submit" value="Registrar Nuevo Usuario" id="bt1">
+         
+         
+        </form>
+     </section>
+    
+</body>
+</html>

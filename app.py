@@ -1,11 +1,51 @@
-from flask import Flask, render_template, request, flash
-
+from flask import Flask, render_template, request, flash, redirect, url_for
+from flask_mysqldb import MySQL
+import sqlite3
+from sqlite3 import Error
 import utils
 import os
 import yagmail as yagmail
+from flask import g
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+
+def get_db():
+    try:
+        if "db" not in g:
+            g.db=sqlite3.connect("myCafeteria.db")
+            return g.db  
+    except Error:
+        print("Error en conexión con la Base de Datos")
+
+
+
+def sql_connection():
+    try:
+        con = sqlite3.connect("myCafeteria.db")
+        return con
+    except Error:
+        print("Error DB")
+
+@app.route('/GestionarUsuarios/')
+def leer():
+    strsql="SELECT * FROM Usuario"
+    con = sql_connection()
+    cursosObj=con.cursor()
+    cursosObj.execute(strsql)
+    usuarios=cursosObj.fetchall()
+    return render_template("CDUsers.html", usuarios = usuarios)
+
+
+@app.route("/delete/<string:id>/")
+def delete(id):
+    strsql="DELETE FROM Usuario WHERE id="+id+";"
+    con = sql_connection()
+    cursosObj=con.cursor()
+    cursosObj.execute(strsql)
+    con.commit()
+    con.close()
+    return redirect("/GestionarUsuarios")
 
 @app.route('/')
 def bienvenida():
