@@ -82,7 +82,7 @@ button:hover {
 
 body {
     font-family: 'Open Sans', sans-serif;
-    background-image: linear-gradient( rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('cafeteria.jpg');
+    background-image: linear-gradient( rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../images/cafeteria.jpg');
     background-attachment:fixed;
     background-repeat: no-repeat;
     background-size: 100%;
