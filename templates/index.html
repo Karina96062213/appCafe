@@ -24,22 +24,29 @@
 
     <div class="login">
         <div class="login-screen">
+            <!--¿Colocar esos mensajes en color blanco?--> 
+            <section class="content">
+                {% for message in get_flashed_messages()%}
+                    <div class = "flash">{{ message}}</div>
+                {% endfor %}
+            </section>
             <div class="app-title">
                 <h2>Inicia sesión</h2>
             </div>
-
-            <div class="login-form">
+            <form name = "loginForm" method = "POST" action="{{ url_for('index') }}">
                 <div class="control-group">
-                    <input type="text" class="login-field" value="" placeholder="Email o número de teléfono" id="login-name">
+                    <input type="text" class="login-field" value="" placeholder="Usuario" id="login-name" name="login-name">
                 </div>
 
                 <div class="control-group">
-                    <input type="password" class="login-field" value="" placeholder="Contraseña" id="login-pass">
+                    <input type="password" class="login-field" value="" placeholder="Contraseña" id="login-pass" name="login-pass">
                     <label class="login-field-icon fui-lock" for="login-pass"></label>
                 </div>
 
-                <a class="btn btn-primary btn-large btn-block" id="botonLogin" href="/home/">Iniciar sesión</a>
-
+                <input class="btn btn-primary btn-large btn-block" id = "botonLogin" type="submit" value="Iniciar sesión">
+            </form>
+            <div class="login-form">
+                
 
 
                 <div class="recordarme">
