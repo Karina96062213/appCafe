@@ -1,8 +1,11 @@
-from flask import Flask, render_template, request, flash
-
+from flask import Flask, render_template, request, flash, redirect, url_for
+from flask_mysqldb import MySQL
+import sqlite3
+from sqlite3 import Error
 import utils
 import os
 import yagmail as yagmail
+from flask import g
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
