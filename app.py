@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
-#from flask_mysqldb import MySQL
+from flask import Flask, render_template, request, flash, redirect, url_for, session, g, url_for, send_file, make_response
 import sqlite3
 from sqlite3 import Error
 import utils
@@ -10,7 +9,8 @@ from flask import g
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-from db import get_db
+from db import get_db, close_db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 @app.route('/')
 def bienvenida():
@@ -20,6 +20,7 @@ def bienvenida():
 def index():
     try:
         if request.method == 'POST':
+            close_db()
             db = get_db()
             username = request.form['login-name']
             password = request.form['login-pass']
@@ -35,19 +36,22 @@ def index():
 
             print("usuario" + username + " clave:" + password)
 
-            user = db.execute("SELECT * FROM Usuario WHERE nombre=? AND contraseña=?",(username,password)).fetchone()
+            user = db.execute("SELECT * FROM Usuario WHERE nombre=?",(username, )).fetchone()
 
             if user is None:
                error = 'Usuario o contraseña inválidos'
                flash(error)
             else:
-                role = db.execute("SELECT descripcion FROM Rol INNER JOIN Usuario ON Rol.id = Usuario.id_Rol WHERE Usuario.nombre = ? AND Usuario.contraseña = ?",(username,password)).fetchone()
-                print(role)
-                if (role[0] == "Administrador"):
-                    return render_template("inicioAdmin.html")
-                else:
-                    return render_template("inicioUsuario.html")
-                flash(error)
+                if check_password_hash(user[3], password):
+                    session.clear()
+                    session['user_id'] = user[0]
+                    role = db.execute("SELECT descripcion FROM Rol INNER JOIN Usuario ON Rol.id = Usuario.id_Rol WHERE Usuario.nombre = ? AND Usuario.contraseña = ?",(username,password)).fetchone()
+                    print(role)
+                    if (role[0] == "Administrador"):
+                        return render_template("inicioAdmin.html")
+                    else:
+                        return render_template("inicioUsuario.html")
+                
                 return render_template("index.html")
         
         return render_template("index.html")
@@ -63,10 +67,14 @@ def inicioAdmin():
 @app.route('/admin/newuser/', methods = ('GET', 'POST'))
 def registroUsuario():
     if request.method == 'POST':
+            #iduser
             username = request.form['nuser']
             password = request.form['cuser']
             email = request.form['euser']
+            #idRoluser
             error = None
+            close_db()
+            db = get_db()
 
             if not utils.isUsernameValid(username):
                 error = "El usuario debe ser alfanumerico"
@@ -79,10 +87,22 @@ def registroUsuario():
                 return render_template('registroUsuario.html')
 
             if not utils.isPasswordValid(password):
-                error = 'La contraseña debe tener por los menos una mayúsccula y una mínuscula y 8 caracteres'
+                error = 'La contraseña debe tener por los menos una mayúscula, una mínuscula y 8 caracteres'
                 flash(error)
                 return render_template('registroUsuario.html')
+             
+            if db.execute("SELECT id FROM Usuario WHERE correo=?", (email,)).fetchone() is not None:
+                error = 'El correo ya existe'.format(email)
+                flash(error)
+                return render_template('registroUsuario.html')
+
+            hashPassword = generate_password_hash(password)
             
+            query = 'INSERT INTO Usuario (nombre, correo, contraseña) VALUES (?,?,?)', (username, email, hashPassword)
+            print(query)
+            db.execute('INSERT INTO Usuario (nombre, correo, contraseña) VALUES (?,?,?)', (username, email, hashPassword))
+            db.commit()
+
             serverEmail = yagmail.SMTP('ejemplomisiontic@gmail.com', 'Maracuya1234')
             serverEmail.send(to = email, subject = 'Activa tu cuenta',
                              contents = 'Bienvenido, usa este link para activar tu cuenta')
