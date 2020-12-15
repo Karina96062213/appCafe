@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
-from flask_mysqldb import MySQL
+#from flask_mysqldb import MySQL
 import sqlite3
 from sqlite3 import Error
 import utils
@@ -39,9 +39,11 @@ def index():
 
             if user is None:
                error = 'Usuario o contraseña inválidos'
+               flash(error)
             else:
-                role = db.execute('SELECT descripcion FROM Rol INNER JOIN Usuario ON Rol.id = Usuario.id WHERE Usuario.nombre = ? AND Usuario.contraseña = ?'),(username,password).fetchone()
-                if (role == 'Administrador'):
+                role = db.execute("SELECT descripcion FROM Rol INNER JOIN Usuario ON Rol.id = Usuario.id_Rol WHERE Usuario.nombre = ? AND Usuario.contraseña = ?",(username,password)).fetchone()
+                print(role)
+                if (role[0] == "Administrador"):
                     return render_template("inicioAdmin.html")
                 else:
                     return render_template("inicioUsuario.html")
