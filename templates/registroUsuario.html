@@ -8,11 +8,11 @@
     <script src="{{ url_for('static', filename = 'js/validacion.js') }}"></script>
 
     <link rel="shortcut icon" href="..\static\images\faviconca.png" type="image/ico" />
-    <link rel="stylesheet" type="text/css" href="..\static\css\index.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
 
 </head>
 <body>
-   <a href="Bienvenida.html"><img src="..\static\images\logocafe.png" alt=""></a>
+   <a href="Bienvenida.html"><img src="/static/images/logocafe.png" alt=""></a>
       
    <section align = "center" class="form">
        <form name="formularioRegistro" method="POST" action = "{{ url_for('registroUsuario') }}">
@@ -26,6 +26,12 @@
         </div>
         <div class = "form-group">
             <input class="label2" type="text" name="euser" id="euser" placeholder="Correo Electronico del Usuario">
+        </div>
+        <div class = "form-group">
+            <br>
+            <input class="checkout" type="number" name ="ruser" id="ruser">
+            <a class="admin">Administrador</a>
+            <br>
         </div>
         <p>¡Al hacer clic en "Registrar", el usuario nuevo acepta nuestras Condiciones, la Política de datos y la Política de cookies.!</p>
          <br>

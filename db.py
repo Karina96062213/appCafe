@@ -6,6 +6,7 @@ def get_db():
     try:
         if 'db' not in g:
             g.db = sqlite3.connect("myCafeteria.db")
+            print("Conexión exitosa")
             return g.db
     except Error:
         print(Error)
