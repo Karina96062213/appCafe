@@ -441,6 +441,7 @@ p{
     font-size: 25px;
 }
 
+
 .lista_desplegable{
     width: 50%;
     padding: 0.6%;
@@ -451,3 +452,9 @@ p{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
 }
+
+.admin{
+    color: rgb(245, 243, 243);
+}
+
+
