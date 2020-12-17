@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 #from flask_mysqldb import MySQL
 import sqlite3
 from sqlite3 import Error
-#from yagmail import yagmail
+import yagmail
 import utils
 import os
 from flask import g
@@ -98,20 +98,23 @@ def registroUsuario():
                 error = None
                 print("Registro Usuario 2")
 
-                #if not utils.isUsernameValid(username):
-                #    error = "El usuario debe ser alfanumerico"
-                #    flash(error)
-                #    return render_template('registroUsuario.html')
+                if not utils.isUsernameValid(username):
+                    error = "El usuario debe ser alfanumerico"
+                    flash(error)
+                    print("Entro a USUARIO")
+                    return render_template('registroUsuario.html')
 
-                #if not utils.isEmailValid(email):
-                #    error = 'Correo inválido'
-                #    flash(error)
-                #    return render_template('registroUsuario.html')
+                if not utils.isEmailValid(email):
+                    error = 'Correo inválido'
+                    flash(error)
+                    print("Entro a EMAIL")
+                    return render_template('registroUsuario.html')
 
-                #if not utils.isPasswordValid(password):
-                #    error = 'La contraseña debe tener por los menos una mayúscula, una mínuscula y 8 caracteres'
-                #    flash(error)
-                #    return render_template('registroUsuario.html')
+                if not utils.isPasswordValid(password):
+                    error = 'La contraseña debe tener por los menos una mayúscula, una mínuscula y 8 caracteres'
+                    flash(error)
+                    print("Entro a PASSWORD")
+                    return render_template('registroUsuario.html')
                 
                 if db.execute("SELECT id FROM Usuario WHERE correo=?", (email,)).fetchone() is not None:
                     print("Registro Usuario 3")
@@ -128,11 +131,11 @@ def registroUsuario():
                 print("Registro Usuario 5")
                 db.commit()
 
-                #serverEmail = yagmail.SMTP('ejemplomisiontic@gmail.com', 'Maracuya1234')
-                #serverEmail.send(to = email, subject = 'Activa tu cuenta',
-                #                 contents = 'Bienvenido, usa este link para activar tu cuenta')
+                serverEmail = yagmail.SMTP('ejemplomisiontic@gmail.com', 'Maracuya1234')
+                serverEmail.send(to = email, subject = 'Activa tu cuenta',
+                                 contents = 'Bienvenido, usa este link para activar tu cuenta')
 
-                #flash('Revisa tu correo para activar tu cuenta')
+                flash('Revisa tu correo para activar tu cuenta')
 
         return render_template("registroUsuario.html")
     

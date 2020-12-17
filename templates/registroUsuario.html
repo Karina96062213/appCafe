@@ -15,7 +15,16 @@
    <a href="Bienvenida.html"><img src="/static/images/logocafe.png" alt=""></a>
       
    <section align = "center" class="form">
-       <form name="formularioRegistro" method="POST" action = "{{ url_for('registroUsuario') }}">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}   
+    <form name="formularioRegistro" method="POST" action = "{{ url_for('registroUsuario') }}">
         <h1>Registro de Usuarios</h1>
         <br>
         <div class = "form-group">
