@@ -170,7 +170,7 @@ def registroProducto():
                 productname = request.form['nproduct']
                 productdesc = request.form['dproduct']
                 productstock = request.form['sproduct']
-                photoPath = "static/images/Empanada de pollo.gif"
+                photoPath = request.form['iproduct']
                 print("Registro Producto 1.1")
                 product_photo = convertToBinaryData(photoPath)
                 print("Registro Producto 1.2")
@@ -207,7 +207,8 @@ def registroProducto():
 
                 query = 'INSERT INTO Producto (nombre, descripcion, stock, imagen) VALUES (?,?,?,?)', (productname, productdesc, productstock, product_photo)
                 print(query)
-                db.execute('INSERT INTO Producto (nombre, descripcion, stock, imagen) VALUES (?,?,?,?)', (productname, productdesc, productstock, product_photo))
+                db.execute('INSERT INTO Producto (nombre, descripcion, stock, imagen) VALUES (?,?,?,?)', 
+                            (productname, productdesc, productstock, product_photo))
                 print("Registro Producto 5")
                 db.commit()
 
