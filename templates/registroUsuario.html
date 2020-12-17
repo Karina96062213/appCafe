@@ -12,9 +12,14 @@
 
 </head>
 <body>
+
+   
+
    <a href="Bienvenida.html"><img src="/static/images/logocafe.png" alt=""></a>
+
       
    <section align = "center" class="form">
+<<<<<<< HEAD
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul class=flashes>
@@ -25,9 +30,13 @@
         {% endif %}
     {% endwith %}   
     <form name="formularioRegistro" method="POST" action = "{{ url_for('registroUsuario') }}">
+=======
+    <a href="Bienvenida.html"><img src="..\static\images\logocafe.png" alt=""></a>
+       <form name="formularioRegistro" method="POST" action = "{{ url_for('registroUsuario') }}">
+>>>>>>> a32468b8ebb9ae3ed827b75e16405ec273a1c172
         <h1>Registro de Usuarios</h1>
         <br>
-        <div class = "form-group">
+                <div class = "form-group">
             <input class="label2" type="text" name="nuser" id="nuser" placeholder="Nombre de Usuario">
         </div>
         <div class = "form-group">
@@ -37,16 +46,31 @@
             <input class="label2" type="text" name="euser" id="euser" placeholder="Correo Electronico del Usuario">
         </div>
         <div class = "form-group">
+
+            <select name="lista_desplegable">
+                <option selected value="0" type="text" name= "id_perfil">Elija el perfil del Usuario </option>
+                    <option value="1">Usuario-Administrador</option> 
+                    <option value="2">Usuario-Almacen</option>
+            </select>
+
             <br>
             <input class="checkout" type="number" name ="ruser" id="ruser">
             <a class="admin">Administrador</a>
             <br>
+
         </div>
         <p>¡Al hacer clic en "Registrar", el usuario nuevo acepta nuestras Condiciones, la Política de datos y la Política de cookies.!</p>
          <br>
         <input type="submit" value="Registrar" id="bt1">
+       
        </form>
     </section>
-   
+    <div>
+        <section align="center" class="form">
+        <br>
+        <input type="submit" value="Ir a Inicio" id="bt_cabezote">
+        <input type="submit" value="Cerrar Sesión" id="bt_cabezote">
+        <br>
+    </div>
 </body>
 </html>
