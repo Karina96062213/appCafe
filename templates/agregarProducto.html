@@ -28,30 +28,23 @@
             </ul>
         {% endif %}
     {% endwith %}   
-    <form name="formularioRegistro" method="POST" action = "{{ url_for('registroUsuario') }}">
-        <h1>Registro de Usuarios</h1>
+    <form name="regisroProducto" method="POST" action = "{{ url_for('registroProducto') }}">
+        <h1>Registro de Productos</h1>
         <br>
                 <div class = "form-group">
-            <input class="label2" type="text" name="nuser" id="nuser" placeholder="Nombre de Usuario">
+            <input class="label2" type="text" name="nproduct" id="nproduct" placeholder="Nombre de Producto">
         </div>
         <div class = "form-group">
-            <input class="label2" type="password" name="cuser" id="cuser" placeholder="Contraseña del Usuario">
+            <input class="label2" type="text" name="dproduct" id="dproduct" placeholder="Descripción del Producto">
         </div>
         <div class = "form-group">
-            <input class="label2" type="text" name="euser" id="euser" placeholder="Correo Electronico del Usuario">
+            <input class="label2" type="text" name="sproduct" id="sproduct" placeholder="Stock inicial de Producto">
         </div>
         <div class = "form-group">
-
-            <select name="lista_desplegable">
-                <option selected value="0" type="text" name= "id_perfil">Elija el perfil del Usuario </option>
-                    <option value="1">Usuario-Administrador</option> 
-                    <option value="2">Usuario-Almacen</option>
-            </select>
-
-            <br>
-            <input class="checkout" type="number" name ="ruser" id="ruser">
-            <a class="admin">Administrador</a>
-            <br>
+            <input class="label2" type="file" name="iproduct" id="iproduct" placeholder="Insertar imagen de producto">
+            <!--$ (function () $ ('# fileupload'). fileupload (url: 'upload', dataType: 'json', add: function (e, data) data.submit ();, success: function ( respuesta, estado) console.log (respuesta);, error: función (error) console.log (error););)-->
+        </div>
+        <div class = "form-group">
 
         </div>
         <p>¡Al hacer clic en "Registrar", el usuario nuevo acepta nuestras Condiciones, la Política de datos y la Política de cookies.!</p>

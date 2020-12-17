@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 #from flask_mysqldb import MySQL
 import sqlite3
 from sqlite3 import Error
+from formulario import convertToBinaryData, writeTofile
 import yagmail
 import utils
 import os
@@ -159,31 +160,72 @@ def inicioUsuario():
 def actualizarStock():
     return render_template("actualizarStock.html")
 
-def convertToBinaryData(filename):
-    #Convert digital data to binary format
-    with open(filename, 'rb') as file:
-        blobData = file.read()
-    return blobData
-
-def insertBLOB(name, stock, photo):
+@app.route('/admin/products/create/', methods = ('GET', 'POST'))
+def registroProducto():
+    print("Registro Producto 1")
     try:
-        sqliteConnection = sqlite3.connect('myCafeteria.db')
-        cursor = sqliteConnection.cursor()
-        print("Connected to SQLite")
-        sqlite_insert_blob_query = """ INSERT INTO Productos
-                                  (nombre, stock, imagen) VALUES (?, ?, ?)"""
+        if request.method == 'POST':
+                close_db()
+                db = get_db()
+                productname = request.form['nproduct']
+                productdesc = request.form['dproduct']
+                productstock = request.form['sproduct']
+                photoPath = "static/images/Empanada de pollo.gif"
+                print("Registro Producto 1.1")
+                product_photo = convertToBinaryData(photoPath)
+                print("Registro Producto 1.2")
+                error = None
+                print("Registro Producto 2")
 
-        empPhoto = convertToBinaryData(photo)
-        # Convert data into tuple format
-        data_tuple = (name, stock, photo)
-        cursor.execute(sqlite_insert_blob_query, data_tuple)
-        sqliteConnection.commit()
-        print("Image and file inserted successfully as a BLOB into a table")
-        cursor.close()
+                if not productname:
+                    error = "Debe ingresar el nombre del producto"
+                    flash(error)
+                    return render_template('agregarProducto.html')
 
-    except sqlite3.Error as error:
-        print("Failed to insert blob data into sqlite table", error)
-    finally:
-        if (sqliteConnection):
-            sqliteConnection.close()
-            print("the sqlite connection is closed")
+                if not productdesc:
+                    error = "Debe ingresar la descripción del producto"
+                    flash(error)
+                    return render_template('agregarProducto.html')
+
+                if not productstock:
+                    error = "Debe ingresar el stock inicial del producto"
+                    flash(error)
+                    return render_template('agregarProducto.html')
+                
+                if not product_photo:
+                    error = "Debe ingresar la imagen del producto"
+                    flash(error)
+                    return render_template('agregarProducto.html')
+                
+                if db.execute("SELECT id FROM Usuario WHERE nombre=?", (productname,)).fetchone() is not None:
+                    print("Registro Producto 3")
+                    error = 'El producto ya existe'.format(productname)
+                    flash(error)
+                    return render_template('agregarProducto.html')
+
+                print("Registro Producto 4")
+
+                query = 'INSERT INTO Producto (nombre, descripcion, stock, imagen) VALUES (?,?,?,?)', (productname, productdesc, productstock, product_photo)
+                print(query)
+                db.execute('INSERT INTO Producto (nombre, descripcion, stock, imagen) VALUES (?,?,?,?)', (productname, productdesc, productstock, product_photo))
+                print("Registro Producto 5")
+                db.commit()
+
+        return render_template("agregarProducto.html")
+    
+    except Exception as e:
+        print(e)
+        return render_template('agregarProducto.html')
+    
+
+#def convertToBinaryData(filename):
+    #Convert digital data to binary format
+#    with open(filename, 'rb') as file:
+#        blobData = file.read()
+#    return blobData
+
+#def writeTofile(data, filename):
+    # Convert binary data to proper format and write it on Hard Disk
+#    with open(filename, 'wb') as file:
+#        file.write(data)
+#    print("Stored blob data into: ", filename, "\n")
