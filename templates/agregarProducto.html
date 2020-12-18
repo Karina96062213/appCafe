@@ -7,8 +7,8 @@
     
     <script src="{{ url_for('static', filename = 'js/validacion.js') }}"></script>
 
-    <link rel="shortcut icon" href="..\static\images\faviconca.png" type="image/ico" />
-    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'images/faviconca.png') }}" type="image/ico" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/index.css') }}">
 
 </head>
 <body>
@@ -19,39 +19,35 @@
 
       
    <section align = "center" class="form">
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class=flashes>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}   
-    <form name="regisroProducto" method="POST" action = "{{ url_for('registroProducto') }}">
-        <h1>Registro de Productos</h1>
-        <br>
-                <div class = "form-group">
-            <input class="label2" type="text" name="nproduct" id="nproduct" placeholder="Nombre de Producto">
-        </div>
-        <div class = "form-group">
-            <input class="label2" type="text" name="dproduct" id="dproduct" placeholder="Descripción del Producto">
-        </div>
-        <div class = "form-group">
-            <input class="label2" type="text" name="sproduct" id="sproduct" placeholder="Stock inicial de Producto">
-        </div>
-        <div class = "form-group">
-            <input class="label2" type="file" name="iproduct" id="iproduct" placeholder="Insertar imagen de producto">
-            <!--$ (function () $ ('# fileupload'). fileupload (url: 'upload', dataType: 'json', add: function (e, data) data.submit ();, success: function ( respuesta, estado) console.log (respuesta);, error: función (error) console.log (error););)-->
-        </div>
-        <div class = "form-group">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}   
+        <form name="regisroProducto" method="POST" action = "{{ url_for('registroProducto') }}">
+            <h1>Registro de Productos</h1>
+            <br>
+            <div class = "form-group">
+                <input class="label2" type="text" name="nproduct" id="nproduct" placeholder="Nombre de Producto">
+            </div>
+            <div class = "form-group">
+                <input class="label2" type="text" name="dproduct" id="dproduct" placeholder="Descripción del Producto">
+            </div>
+            <div class = "form-group">
+                <input class="label2" type="text" name="sproduct" id="sproduct" placeholder="Stock inicial de Producto">
+            </div>
+            <div class = "form-group">
+                <input class="label2" type="file" name="iproduct" id="iproduct" placeholder="Insertar imagen de producto">
+            </div>
 
-        </div>
-        <p>¡Al hacer clic en "Registrar", el usuario nuevo acepta nuestras Condiciones, la Política de datos y la Política de cookies.!</p>
-         <br>
-        <input type="submit" value="Registrar" id="bt1">
-       
-       </form>
+            <p>¡Al hacer clic en "Registrar", el usuario nuevo acepta nuestras Condiciones, la Política de datos y la Política de cookies.!</p>
+            <br>
+            <input type="submit" value="Registrar" id="bt1">
+        </form>
     </section>
     <div>
         <section align="center" class="form">

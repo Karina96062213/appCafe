@@ -125,11 +125,17 @@ def registroUsuario():
 
                 hashPassword = generate_password_hash(password)
                 print("Registro Usuario 4")
-
-                query = 'INSERT INTO Usuario (nombre, correo, contraseña, id_Rol) VALUES (?,?,?,?)', (username, email, hashPassword, idRolUser)
-                print(query)
-                db.execute('INSERT INTO Usuario (nombre, correo, contraseña, id_Rol) VALUES (?,?,?,?)', (username, email, hashPassword, idRolUser))
-                print("Registro Usuario 5")
+                
+                if idRolUser == "Administrador":
+                    query = 'INSERT INTO Usuario (nombre, correo, contraseña, id_Rol) VALUES (?,?,?,?)', (username, email, hashPassword, 1)
+                    print(query)
+                    db.execute('INSERT INTO Usuario (nombre, correo, contraseña, id_Rol) VALUES (?,?,?,?)', (username, email, hashPassword, 1))
+                    print("Registro Usuario 5")
+                else:
+                    query = 'INSERT INTO Usuario (nombre, correo, contraseña, id_Rol) VALUES (?,?,?,?)', (username, email, hashPassword, 2)
+                    print(query)
+                    db.execute('INSERT INTO Usuario (nombre, correo, contraseña, id_Rol) VALUES (?,?,?,?)', (username, email, hashPassword, 2))
+                    print("Registro Usuario 5")
                 db.commit()
 
                 serverEmail = yagmail.SMTP('ejemplomisiontic@gmail.com', 'Maracuya1234')
@@ -144,7 +150,7 @@ def registroUsuario():
         print(e)
         return render_template('registroUsuario.html')
 
-@app.route('/admin/products/')
+@app.route('/admin/products/', methods = ('GET', 'POST'))
 def productosAdmin():
     return render_template("productosAdmin.html")
 
@@ -170,7 +176,7 @@ def registroProducto():
                 productname = request.form['nproduct']
                 productdesc = request.form['dproduct']
                 productstock = request.form['sproduct']
-                photoPath = request.form['iproduct']
+                photoPath = 'static/images/'+ request.form['iproduct']
                 print("Registro Producto 1.1")
                 product_photo = convertToBinaryData(photoPath)
                 print("Registro Producto 1.2")
@@ -205,28 +211,15 @@ def registroProducto():
 
                 print("Registro Producto 4")
 
-                query = 'INSERT INTO Producto (nombre, descripcion, stock, imagen) VALUES (?,?,?,?)', (productname, productdesc, productstock, product_photo)
-                print(query)
-                db.execute('INSERT INTO Producto (nombre, descripcion, stock, imagen) VALUES (?,?,?,?)', 
-                            (productname, productdesc, productstock, product_photo))
+                query = 'INSERT INTO Producto (nombre, descripcion, stock, imagen) VALUES (?,?,?,?)',(productname, productdesc, productstock, product_photo)
+                db.execute('INSERT INTO Producto (nombre, descripcion, stock, imagen) VALUES (?,?,?,?)',(productname, productdesc, productstock, product_photo))
                 print("Registro Producto 5")
                 db.commit()
+
+                flash('Producto ingresado satisfactoriamente.')
 
         return render_template("agregarProducto.html")
     
     except Exception as e:
         print(e)
         return render_template('agregarProducto.html')
-    
-
-#def convertToBinaryData(filename):
-    #Convert digital data to binary format
-#    with open(filename, 'rb') as file:
-#        blobData = file.read()
-#    return blobData
-
-#def writeTofile(data, filename):
-    # Convert binary data to proper format and write it on Hard Disk
-#    with open(filename, 'wb') as file:
-#        file.write(data)
-#    print("Stored blob data into: ", filename, "\n")

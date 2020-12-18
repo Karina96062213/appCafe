@@ -31,7 +31,7 @@
     <form name="formularioRegistro" method="POST" action = "{{ url_for('registroUsuario') }}">
         <h1>Registro de Usuarios</h1>
         <br>
-                <div class = "form-group">
+        <div class = "form-group">
             <input class="label2" type="text" name="nuser" id="nuser" placeholder="Nombre de Usuario">
         </div>
         <div class = "form-group">
@@ -41,17 +41,11 @@
             <input class="label2" type="text" name="euser" id="euser" placeholder="Correo Electronico del Usuario">
         </div>
         <div class = "form-group">
-
-            <select name="lista_desplegable">
-                <option selected value="0" type="text" name= "id_perfil">Elija el perfil del Usuario </option>
-                    <option value="1">Usuario-Administrador</option> 
-                    <option value="2">Usuario-Almacen</option>
-            </select>
-
-            <br>
-            <input class="checkout" type="number" name ="ruser" id="ruser">
-            <a class="admin">Administrador</a>
-            <br>
+        <select name="ruser" class="label2" id="ruser">
+            <option value = "0">Elija el perfil del Usuario </option>
+            <option value = "1">Administrador</option> 
+            <option value = "2">Usuario</option>
+        </select>
 
         </div>
         <p>¡Al hacer clic en "Registrar", el usuario nuevo acepta nuestras Condiciones, la Política de datos y la Política de cookies.!</p>
