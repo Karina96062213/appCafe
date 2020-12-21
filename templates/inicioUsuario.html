@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="..\static\css\index.css">
-    <link rel="shortcut icon" href="..\static\images\faviconca.png" type="image/ico">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/index.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'images/faviconca.png') }}" type="image/ico">
     <title>Inicio Usuario</title>
 </head>
 <body>
     <div class = "encabezado">
         <header class="header1">
             <a href="inicioUsuario.html">
-                <img class="imagenLogoCafe" src="..\static\images\logocafe.png" alt="" href="inicioUsuario.html">
+                <img class="imagenLogoCafe" src="{{ url_for('static', filename = 'images/logocafe.png') }}" alt="" href="inicioUsuario.html">
             </a>
             <h2>
                 Bienvenido(a): Nombre de Usuario
@@ -22,8 +22,12 @@
     <br/><br/>
     
     <div class = "busqueda">
-            <input id = "producto" type = "text" placeholder = "Producto" name = "producto" size="75">
-            
+            <form class="formBusquedaStock" action="/buscarNombreUsuario" method="POST" novalidate>
+                <button class="inicioUsuario" id = "buscarProducto">
+                    Buscar
+                </button>
+                <input id = "producto" type = "text" placeholder = "Producto" name = "producto" size="75">
+            </form>
             <select name="opcionBusqueda" id="opcionBusqueda">
                 <option value="id">
                     id
@@ -32,18 +36,38 @@
                     nombre
                 </option>
             </select>
-            
-            <button class="inicioUsuario" id = "buscarProducto">
-                Buscar
-            </button>
     </div>
 
     <br/><br/>
 
-    <div class = "tablaProducto">
-        <div class="imagenesProducto">
-            Aquí se muestran las imágenes.
-        </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-xs-12">
+    <table class="table table-hover table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Imagen</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+            {%for datos in reg%}
+              <tr>
+              <td>
+                <img src="/static/images/{{datos[4]}}"  width="100" height="100">
+              </td>
+              <td>{{datos[1]}}</td>                              
+              <td>{{datos[2]}}</td>
+              <td>{{datos[3]}}</td>
+              <td>
+                   <div class="col-sm-6"><a href="/editarStock/{{datos[0]}}"><button type="submit" class="btn btn-default">Actualizar Stock</button></a></div >
+              </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
     </div>
     <div>
         <section align="center" class="form">

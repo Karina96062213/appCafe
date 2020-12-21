@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualizar Stock</title>
+    <title>Actualizar Producto</title>
     
     <script src="{{ url_for('static', filename = 'js/validacion.js') }}"></script>
 
@@ -27,21 +27,29 @@
                 {% endfor %}
                 </ul>
             {% endif %}
-        {% endwith %}
-        {%for datos in reg%}   
-        <form name="updateStock" method="POST" action = "/updateStock/{{datos[0]}}" enctype="multipart/form-data" novalidate>
-            <h1>Actualización de Stock</h1>
+        {% endwith %}   
+        <form name="updateProducto" method="POST" action = "/updateproduct/" enctype="multipart/form-data" novalidate>
+            <h1>Actualización de Productos</h1>
             <br>
+            {%for datos in reg%}
             <div class = "form-group">
-                <input class="label2" type="text" value = {{datos[0]}} name="codigoUser" id="codigoUser" placeholder="Código de Producto" disabled>
+                <input class="label2" type="text" value = {{datos[0]}} name="codigo" id="codigo" placeholder="Nombre de Producto" disabled>
             </div>
-                <input class="label2" type="text" value = {{datos[3]}} name="nuevoStockUser" id="nuevoStockUser" placeholder="Stock inicial de Producto">
+            <div class = "form-group">
+                <input class="label2" type="text" value = {{datos[1]}} name="nuevoNombre" id="nuevoNombre" placeholder="Nombre de Producto">
+            </div>
+            <div class = "form-group">
+                <input class="label2" type="text" value = {{datos[2]}} name="nuevaDescripcion" id="nuevaDescripcion" placeholder="Descripción del Producto">
+            </div>
+            <div class = "form-group">
+                <input class="label2" type="text" value = {{datos[3]}} name="nuevoStock" id="nuevoStock" placeholder="Stock inicial de Producto">
             </div>
             <div class = "form-group">
                 <img src="/static/images/{{datos[4]}}"  width="100" height="100">
+                <input class="label2" type = "file" value = {{datos[4]}} name="nuevaImagen" id="nuevaImagen" placeholder="Insertar imagen de producto", accept="image/png, image/jpeg">
             </div>
             {%endfor%}
-            <input type="submit" value="Actualizar Stock" id="bt1">
+            <input type="submit" value="Actualizar" id="bt1">
         </form>
     </section>
     <div>
