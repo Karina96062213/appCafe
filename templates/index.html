@@ -8,8 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href= "..\static\css\index.css">
-    <link rel="shortcut icon" href="..\static\images\faviconca.png" type="image/ico" />
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename = 'css/index.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'images/faviconca.png') }}" type="image/ico" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
     <title>Login Coffe</title>
 </head>
@@ -17,7 +17,7 @@
 <body>
     <div>
         <header class="container">
-            <img src="..\static\images\logocafe.png" alt="">
+            <img src="{{ url_for('static', filename = 'images/logocafe.png') }}" alt="">
         </header>
     </div>
 
@@ -53,13 +53,7 @@
                     <a class="login-link" href="#">¿Necesitas Ayuda?</a>
                    
                 </div>
-                <div>
-                    <section align="center" class="form">
-                    <br>
-                    <input type="submit" value="Ir a Inicio" id="bt_cabezote">
-                    <input type="submit" value="Cerrar Sesión" id="bt_cabezote">
-                    <br>
-                </div>
+                
                 <p><br> Esta página está protegida por Google reCAPTCHA<br> para comprobar que no eres un robot. Más info.</p>
               
             </div>
